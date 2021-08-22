@@ -4,6 +4,7 @@ from torch.utils.data import Dataset
 import numpy as np
 
 
+############## Task2- Implement Transformer ##################################
 class TransformerDataset(Dataset):
     def __init__(self, encoder_inputs, decoder_inputs, decoder_targets):
         super(TransformerDataset,self).__init__()
@@ -214,7 +215,7 @@ class DecoderLayer(nn.Module):
     
     
     
-    
+############## Task3- Implement BERT ##################################
     
     
     
