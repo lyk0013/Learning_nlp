@@ -1,3 +1,7 @@
+# custom
+test-glue/
+runs/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
