@@ -3,6 +3,7 @@ test-glue/
 runs/
 .data/
 datasets/
+models/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
