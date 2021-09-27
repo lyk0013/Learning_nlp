@@ -12,6 +12,9 @@ from torchtext.data.utils import get_tokenizer
 
 
 def get_vocab_imdb(data, min_freq=5):
+    return get_vocab(data, min_freq)
+
+def get_vocab(data, min_freq=5):
     tokenizer = get_tokenizer('spacy', language='en_core_web_sm')
     counter = Counter()
     for (label, line) in data:
@@ -24,22 +27,27 @@ def get_vocab_imdb(data, min_freq=5):
     
     
 def get_tokenized_imdb(data):
+    return get_tokenized(data)
+
+def get_tokenized(data):
     tokenizer = get_tokenizer('spacy', language='en_core_web_sm')
     return [tokenizer(review) for (_, review) in data]
-    
-    
-def preprocess_imdb(data, vocab):
-    max_l = 500
+
+
+def preprocess(data, vocab, max_l=500):
     
     def pad(x):
         return x[:max_l] if len(x) > max_l else x + [0] * (max_l-len(x))
-    data = list(data)
-    tokenized_data = get_tokenized_imdb(data)
+    tokenized_data = get_tokenized(data)
     features = torch.tensor(
         [pad(vocab.lookup_indices(words)) for words in tokenized_data]
     )
     labels = torch.tensor([1 if score=='pos' else 0 for (score, _) in data])
     return features, labels
+    
+    
+def preprocess_imdb(data, vocab, max_l=500):
+    return preprocess(data, vocab, max_l)
     
     
 def train(model, iterator, optimizer, loss, device):
